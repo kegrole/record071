@@ -1,0 +1,193 @@
+{
+  "total": 12,
+  "per_class": {
+    "transient": 2,
+    "permanent": 2,
+    "rate_limited": 1,
+    "blocked": 1,
+    "parse_error": 1,
+    "ok": 5
+  },
+  "successes": [
+    {
+      "url": "http://example.com/rate-limited",
+      "attempts": 2
+    },
+    {
+      "url": "http://example.com/flaky-503",
+      "attempts": 3
+    },
+    {
+      "url": "http://example.com/ok-alpha",
+      "attempts": 1
+    },
+    {
+      "url": "http://example.com/ok-mentions-404",
+      "attempts": 1
+    },
+    {
+      "url": "http://example.com/ok-beta",
+      "attempts": 1
+    },
+    {
+      "url": "http://example.com/ok-gamma",
+      "attempts": 1
+    },
+    {
+      "url": "http://example.com/ok-delta",
+      "attempts": 1
+    }
+  ],
+  "failures": [
+    {
+      "url": "http://example.com/missing-404",
+      "class": "permanent",
+      "attempts": 1,
+      "action": "skip",
+      "waits": []
+    },
+    {
+      "url": "http://example.com/dns-failure",
+      "class": "permanent",
+      "attempts": 1,
+      "action": "skip",
+      "waits": []
+    },
+    {
+      "url": "http://example.com/structure-changed",
+      "class": "parse_error",
+      "attempts": 1,
+      "action": "skip",
+      "waits": []
+    },
+    {
+      "url": "http://example.com/always-timeout",
+      "class": "transient",
+      "attempts": 3,
+      "action": "skip",
+      "waits": [
+        1,
+        2
+      ]
+    }
+  ],
+  "manual": [
+    {
+      "url": "http://example.com/blocked-captcha",
+      "class": "blocked",
+      "attempts": 1,
+      "action": "report_manual"
+    }
+  ],
+  "details": [
+    {
+      "url": "http://example.com/rate-limited",
+      "class": "rate_limited",
+      "attempts": 2,
+      "waits": [
+        7
+      ],
+      "action": "none",
+      "result": "success"
+    },
+    {
+      "url": "http://example.com/flaky-503",
+      "class": "transient",
+      "attempts": 3,
+      "waits": [
+        1,
+        2
+      ],
+      "action": "none",
+      "result": "success"
+    },
+    {
+      "url": "http://example.com/missing-404",
+      "class": "permanent",
+      "attempts": 1,
+      "waits": [],
+      "action": "skip",
+      "result": "failure"
+    },
+    {
+      "url": "http://example.com/dns-failure",
+      "class": "permanent",
+      "attempts": 1,
+      "waits": [],
+      "action": "skip",
+      "result": "failure"
+    },
+    {
+      "url": "http://example.com/blocked-captcha",
+      "class": "blocked",
+      "attempts": 1,
+      "waits": [],
+      "action": "report_manual",
+      "result": "manual"
+    },
+    {
+      "url": "http://example.com/structure-changed",
+      "class": "parse_error",
+      "attempts": 1,
+      "waits": [],
+      "action": "skip",
+      "result": "failure"
+    },
+    {
+      "url": "http://example.com/always-timeout",
+      "class": "transient",
+      "attempts": 3,
+      "waits": [
+        1,
+        2
+      ],
+      "action": "skip",
+      "result": "failure"
+    },
+    {
+      "url": "http://example.com/ok-alpha",
+      "class": "ok",
+      "attempts": 1,
+      "waits": [],
+      "action": "none",
+      "result": "success"
+    },
+    {
+      "url": "http://example.com/ok-mentions-404",
+      "class": "ok",
+      "attempts": 1,
+      "waits": [],
+      "action": "none",
+      "result": "success"
+    },
+    {
+      "url": "http://example.com/ok-beta",
+      "class": "ok",
+      "attempts": 1,
+      "waits": [],
+      "action": "none",
+      "result": "success"
+    },
+    {
+      "url": "http://example.com/ok-gamma",
+      "class": "ok",
+      "attempts": 1,
+      "waits": [],
+      "action": "none",
+      "result": "success"
+    },
+    {
+      "url": "http://example.com/ok-delta",
+      "class": "ok",
+      "attempts": 1,
+      "waits": [],
+      "action": "none",
+      "result": "success"
+    }
+  ],
+  "counts": {
+    "success": 7,
+    "failure": 4,
+    "manual": 1
+  }
+}

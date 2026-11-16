@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "max_attempts": 3,
+    "backoff": {"base": 1, "multiplier": 2}
+  },
+  "sleep_scale": 0,
+  "parse_pattern": "<title>[^<]+</title>",
+  "captcha_markers": ["captcha"],
+  "classification": {
+    "timeout": "transient",
+    "connection_reset": "transient",
+    "http_502": "transient",
+    "http_503": "transient",
+    "http_504": "transient",
+    "http_404": "permanent",
+    "http_410": "permanent",
+    "dns_failure": "permanent",
+    "cert_error": "permanent",
+    "http_429": "rate_limited",
+    "http_403_captcha": "blocked",
+    "parse_mismatch": "parse_error"
+  },
+  "actions": {
+    "transient": {
+      "action": "retry",
+      "max_attempts": 3,
+      "backoff": {"base": 1, "multiplier": 2},
+      "on_exhaust": "skip"
+    },
+    "permanent": {"action": "skip"},
+    "rate_limited": {
+      "action": "retry",
+      "max_attempts": 3,
+      "respect_retry_after": true,
+      "on_exhaust": "skip"
+    },
+    "blocked": {"action": "report_manual"},
+    "parse_error": {"action": "skip"}
+  }
+}

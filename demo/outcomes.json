@@ -1,0 +1,79 @@
+[
+  {
+    "url": "http://example.com/rate-limited",
+    "script": [
+      {"status": 429, "headers": {"Retry-After": "7"}, "body": "slow down"},
+      {"status": 200, "headers": {}, "body": "<html><head><title>Rate Limited OK</title></head><body>finally</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/flaky-503",
+    "script": [
+      {"status": 503, "headers": {}, "body": "service unavailable"},
+      {"status": 503, "headers": {}, "body": "service unavailable"},
+      {"status": 200, "headers": {}, "body": "<html><head><title>Recovered</title></head><body>ok</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/missing-404",
+    "script": [
+      {"status": 404, "headers": {}, "body": "not found"}
+    ]
+  },
+  {
+    "url": "http://example.com/dns-failure",
+    "script": [
+      {"error": "dns_failure"}
+    ]
+  },
+  {
+    "url": "http://example.com/blocked-captcha",
+    "script": [
+      {"status": 403, "headers": {}, "body": "<html><body>Please solve the CAPTCHA to continue</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/structure-changed",
+    "script": [
+      {"status": 200, "headers": {}, "body": "<html><body><div id=\"new-layout\">no title element anymore</div></body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/always-timeout",
+    "script": [
+      {"error": "timeout"},
+      {"error": "timeout"},
+      {"error": "timeout"}
+    ]
+  },
+  {
+    "url": "http://example.com/ok-alpha",
+    "script": [
+      {"status": 200, "headers": {}, "body": "<html><head><title>Alpha</title></head><body>alpha</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/ok-mentions-404",
+    "script": [
+      {"status": 200, "headers": {}, "body": "<html><head><title>Archive Stats</title></head><body>We removed 404 stale entries yesterday.</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/ok-beta",
+    "script": [
+      {"status": 200, "headers": {}, "body": "<html><head><title>Beta</title></head><body>beta</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/ok-gamma",
+    "script": [
+      {"status": 200, "headers": {}, "body": "<html><head><title>Gamma</title></head><body>gamma</body></html>"}
+    ]
+  },
+  {
+    "url": "http://example.com/ok-delta",
+    "script": [
+      {"status": 200, "headers": {}, "body": "<html><head><title>Delta</title></head><body>delta</body></html>"}
+    ]
+  }
+]
